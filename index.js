@@ -33,8 +33,9 @@ let runChar = ( num ) => {
         }
     
         if(char === "."){
-            console.log(storage[currentLocation])
-            try{console.log(chars.find(x => x.code === storage[currentLocation].toString()).dec)}catch(e){}
+            try{console.log(chars.find(x => x.code === storage[currentLocation].toString()).dec)}catch(e){
+                throw new Error("Couldn't find a character for: " + storage[currentLocation]);
+            }
         }
 
         if(char === "|"){
@@ -65,11 +66,11 @@ let runChar = ( num ) => {
             }
         } else{
             if(splitTxt[num + 1])
-            process.nextTick(() => {runChar(num + 1);})
+            runChar(num + 1);
         }
     } else{
         if(splitTxt[num + 1])
-        process.nextTick(() => {runChar(num + 1);})
+        runChar(num + 1);
     }
 }
 
